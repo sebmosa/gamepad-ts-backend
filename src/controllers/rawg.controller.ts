@@ -11,7 +11,7 @@ export class RawgController {
     try {
       const response = await axios.get(`${apiUrl}/platforms?key=${key}`)
       const result = PlatformSchema.parse(response.data)
-      const platforms = result.results.map(platform => {
+      const platforms = result.results.map((platform) => {
         return { id: platform.id, name: platform.name, slug: platform.slug }
       })
       res.status(200).json(platforms)
@@ -26,7 +26,7 @@ export class RawgController {
     try {
       const response = await axios.get(`${apiUrl}/genres?key=${key}`)
       const result = GenreSchema.parse(response.data)
-      const genres = result.results.map(genre => {
+      const genres = result.results.map((genre) => {
         return { id: genre.id, name: genre.name, slug: genre.slug }
       })
       res.status(200).json(genres)
@@ -46,9 +46,7 @@ export class RawgController {
       const rating = req.query.rating as string
       const sort = req.query.sort as string
 
-      const response = await axios.get(
-        `${apiUrl}/games?key=${key}&page_size=${pageSize}&page=${pageNumber}&search=${search}&search_precise=true&platforms=${platforms}&genres=${genres}&metacritic=${rating}&ordering${sort}`
-      )
+      const response = await axios.get(`${apiUrl}/games?key=${key}&page_size=${pageSize}&page=${pageNumber}&search=${search}&search_precise=true&platforms=${platforms}&genres=${genres}&metacritic=${rating}&ordering${sort}`)
 
       // Use of safeParse for adjusting zodSchema
       const result = CustomSchema.safeParse(response.data)
@@ -59,7 +57,6 @@ export class RawgController {
         const customGameList = result.data
         res.status(200).json(customGameList)
       }
-
     } catch (error) {
       res.status(400).json({
         errors: [{ msg: 'Error from RAWG API' }],

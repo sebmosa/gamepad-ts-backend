@@ -1,12 +1,4 @@
-import {
-  test,
-  describe,
-  expect,
-  beforeEach,
-  afterEach,
-  beforeAll,
-  afterAll,
-} from 'vitest'
+import { test, describe, expect, beforeEach, afterEach, beforeAll, afterAll } from 'vitest'
 import { app } from '../app'
 import Request from 'supertest'
 import * as db from './db'
@@ -27,8 +19,7 @@ afterAll(async () => {
 describe('User Controller', () => {
   describe('Login', () => {
     test('when we send valid email and password with authorization, login be succefull', async () => {
-      const token =
-        'fyB6M_-ACLHm2zG3Zbfi99__2Q6nymE0npUq4c645DU8JMFGciU9qs-lZFDEgFsu'
+      const token = 'fyB6M_-ACLHm2zG3Zbfi99__2Q6nymE0npUq4c645DU8JMFGciU9qs-lZFDEgFsu'
       const response = await Request(app)
         .post('/login')
         .set('Authorization', `Bearer ${token}`)
@@ -39,14 +30,12 @@ describe('User Controller', () => {
         .expect('Content-Type', /json/)
       expect(response.statusCode).toEqual(201)
       expect(response.body).toMatchObject({
-        token:
-          'fyB6M_-ACLHm2zG3Zbfi99__2Q6nymE0npUq4c645DU8JMFGciU9qs-lZFDEgFsu',
+        token: 'fyB6M_-ACLHm2zG3Zbfi99__2Q6nymE0npUq4c645DU8JMFGciU9qs-lZFDEgFsu',
       })
     })
 
     test('when we send invalid email and password, return invalid user', async () => {
-      const token =
-        'fyB6M_-ACLHm2zG3Zbfi99__2Q6nymE0npUq4c645DU8JMFGciU9qs-lZFDEgFsu'
+      const token = 'fyB6M_-ACLHm2zG3Zbfi99__2Q6nymE0npUq4c645DU8JMFGciU9qs-lZFDEgFsu'
       const response = await Request(app)
         .post('/login')
         .set('Authorization', `Bearer ${token}`)
@@ -57,7 +46,7 @@ describe('User Controller', () => {
         .expect('Content-Type', /json/)
       expect(response.statusCode).toEqual(400)
       expect(response.body).toEqual({
-        msg: 'Invalid user'
+        msg: 'Invalid user',
       })
     })
 
@@ -133,9 +122,7 @@ describe('User Controller', () => {
     })
 
     test('when we send nothing, return error, sign up unsuccesful', async () => {
-      const response = await Request(app)
-        .post('/signup')
-        .expect('Content-Type', /json/)
+      const response = await Request(app).post('/signup').expect('Content-Type', /json/)
       expect(response.statusCode).toEqual(400)
       expect(response.body).toEqual({ msg: 'Missing parameter(s)' })
     })

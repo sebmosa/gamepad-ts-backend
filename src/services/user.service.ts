@@ -6,10 +6,7 @@ import { User } from '../models/User'
 export class UserService {
   static async createUser(email: string, username: string, password: string) {
     try {
-      if (
-        (await UserService.validEmail(email)) &&
-        (await UserService.checkUser(email) === false)
-      ) {
+      if ((await UserService.validEmail(email)) && (await UserService.checkUser(email)) === false) {
         const salt = Uid2(64)
         const hash = Sha256(password + salt).toString(Base64)
         const token = Uid2(64)
@@ -37,8 +34,7 @@ export class UserService {
   }
 
   static async validEmail(email: string) {
-    const emailRegex =
-      /^[a-zA-Z0-9.!#$%&'*+=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
     return emailRegex.test(email) ? true : false
   }
 

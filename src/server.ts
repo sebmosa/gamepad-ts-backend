@@ -4,7 +4,7 @@ import { app } from './app'
  * Server Activation
  */
 
-const port = 3338
+const port = process.env.PORT
 
 try {
   app.listen(port, (): void => {

@@ -5,11 +5,7 @@ export interface UserRequest extends Request {
   user?: IUser
 }
 
-export const authentification = async (
-  req: UserRequest,
-  res: Response,
-  next: NextFunction
-) => {
+export const authentification = async (req: UserRequest, res: Response, next: NextFunction) => {
   if (req.headers.authorization) {
     const token = req.headers.authorization.replace('Bearer ', '')
     const user = await User.findOne({ token })
@@ -20,7 +16,6 @@ export const authentification = async (
     } else {
       return res.status(401).json({ msg: 'Unauthorized' })
     }
-
   } else {
     return res.status(401).json({ msg: 'Unauthorized' })
   }

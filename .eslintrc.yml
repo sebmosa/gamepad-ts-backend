@@ -1,12 +1,12 @@
 root: true
-parser: "@typescript-eslint/parser"
+parser: '@typescript-eslint/parser'
 env:
   node: true
 extends:
   - eslint:recommended
   - plugin:@typescript-eslint/recommended
 plugins:
-  - "@typescript-eslint"
+  - '@typescript-eslint'
 rules:
   indent:
     - error

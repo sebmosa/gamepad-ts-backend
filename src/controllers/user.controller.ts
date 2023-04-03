@@ -9,21 +9,13 @@ export class UserController {
 
       const { email, username, password } = user
 
-      if (
-        typeof email === 'string' &&
-        typeof username === 'string' &&
-        typeof password === 'string'
-      ) {
+      if (typeof email === 'string' && typeof username === 'string' && typeof password === 'string') {
         const userExist = await UserService.checkUser(email)
 
         if (userExist) {
           res.status(400).json({ msg: 'Account existing' })
         } else {
-          const newUser = await UserService.createUser(
-            email,
-            username,
-            password
-          )
+          const newUser = await UserService.createUser(email, username, password)
           res.status(201).json(newUser)
         }
       } else {
@@ -42,7 +34,7 @@ export class UserController {
 
       const { email, password } = user
 
-      if ( typeof email === 'string' && typeof password === 'string') {
+      if (typeof email === 'string' && typeof password === 'string') {
         const userExist = await UserService.checkUser(email)
 
         if (userExist) {
@@ -52,9 +44,8 @@ export class UserController {
           res.status(400).json({ msg: 'Invalid user' })
         }
       }
-
     } catch (error) {
-      res.status(400).json({ msg: 'Error, login unsuccesful'})
+      res.status(400).json({ msg: 'Error, login unsuccesful' })
     }
   }
 }

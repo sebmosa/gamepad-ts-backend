@@ -15,7 +15,6 @@ afterAll(async () => {
   await db.closeDatabase()
 })
 
-
 describe('User Service', () => {
   describe('Check user', () => {
     test('when we send email identification, we verify it is present in base', async () => {
@@ -47,7 +46,7 @@ describe('User Service', () => {
       const username = 'test2'
       const password = 'test2password'
       const create = await UserService.createUser(email, username, password)
-      expect(create).toMatchObject({ email, account: {username} })
+      expect(create).toMatchObject({ email, account: { username } })
     })
   })
 
@@ -69,5 +68,4 @@ describe('User Service', () => {
       expect(valid).toMatchObject({ account: { username: 'test' } })
     })
   })
-
 })

@@ -68,7 +68,8 @@ export const CustomSchema = z.object({
           toplay: z.number().optional(),
           dropped: z.number().optional(),
         })
-        .optional().nullable(),
+        .optional()
+        .nullable(),
       metacritic: z.number().nullable(),
       suggestions_count: z.number(),
       updated: z.string(),
@@ -99,9 +100,7 @@ export const CustomSchema = z.object({
       community_rating: z.number().optional(),
       saturated_color: z.string(),
       dominant_color: z.string(),
-      short_screenshots: z.array(
-        z.object({ id: z.number(), image: z.string() })
-      ),
+      short_screenshots: z.array(z.object({ id: z.number(), image: z.string() })),
       parent_platforms: z.array(
         z.object({
           platform: z.object({
@@ -111,9 +110,7 @@ export const CustomSchema = z.object({
           }),
         })
       ),
-      genres: z.array(
-        z.object({ id: z.number(), name: z.string(), slug: z.string() })
-      ),
+      genres: z.array(z.object({ id: z.number(), name: z.string(), slug: z.string() })),
     })
   ),
   user_platforms: z.boolean(),

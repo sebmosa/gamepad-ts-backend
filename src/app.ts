@@ -3,6 +3,7 @@
  */
 
 import cors from 'cors'
+import compression from 'compression'
 import express from 'express'
 import { GamepadDB } from '../src/config/db'
 import { RawgRoute } from './routes/rawg.route'
@@ -19,6 +20,7 @@ const app = express()
  */
 
 app.use(cors())
+app.use(compression())
 app.use(express.json())
 
 /**
