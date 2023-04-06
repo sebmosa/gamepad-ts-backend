@@ -5,6 +5,7 @@ import {
   GenreSchema,
   CustomSchema,
   AllSchema,
+  GameSchema,
 } from '../types/rawg.type.js'
 import { RawgService } from '../services/rawg.service.js'
 
@@ -112,6 +113,25 @@ export class RawgController {
     } catch (error) {
       res.status(400).json({
         errors: [{ msg: 'Error from RAWG API' }],
+      })
+    }
+  }
+
+  static async getGameDetails(req: Request, res: Response) {
+    const id = req.params.id
+
+    try {
+      const response = await axios.get(`${apiUrl}/games/${id}?key=${key}`)
+      const result = GameSchema.safeParse(response.data)
+
+      if (!result.success) {
+        res.status(400).json(result.error)
+      } else {
+        res.status(200).json(result.data)
+      }
+    } catch (error) {
+      res.status(400).json({
+        errors: [{ msg: 'Bad request for game details' }],
       })
     }
   }

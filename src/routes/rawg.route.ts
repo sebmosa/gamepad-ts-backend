@@ -9,4 +9,6 @@ RawgRoute.get('/genres', RawgController.getGenres)
 
 RawgRoute.get('/games', RawgController.getCustomGamelist)
 
+RawgRoute.get('/games/:id', RawgController.getGameDetails)
+
 export { RawgRoute }
