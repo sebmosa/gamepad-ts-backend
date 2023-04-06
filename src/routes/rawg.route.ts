@@ -1,4 +1,4 @@
-import { RawgController } from '../controllers/rawg.controller'
+import { RawgController } from '../controllers/rawg.controller.js'
 import { Router } from 'express'
 
 const RawgRoute = Router()

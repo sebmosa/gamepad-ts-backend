@@ -1,7 +1,12 @@
 import { Request, Response } from 'express'
 import axios from 'axios'
-import { PlatformSchema, GenreSchema, CustomSchema } from '../types/rawg.type'
-import { RawgService } from '../services/rawg.service'
+import {
+  PlatformSchema,
+  GenreSchema,
+  CustomSchema,
+  AllSchema,
+} from '../types/rawg.type.js'
+import { RawgService } from '../services/rawg.service.js'
 
 // Rawg requests parameters
 const apiUrl = 'https://api.rawg.io/api'
@@ -37,31 +42,41 @@ export class RawgController {
       })
     }
   }
+
   static async getCustomGamelist(req: Request, res: Response) {
     try {
       const page_size = req.query.page_size as string
       const page = req.query.page as string
       const search = req.query.search as string
-      const platforms = req.query.platforms as string
-      const genres = req.query.genres as string
+      const platforms = req.query.platforms
+      const genres = req.query.genres
       const rating = req.query.rating as string
       const sort = req.query.sort as string
 
-      const response = await axios.get(
-        `${apiUrl}/games?key=${key}&page_size=${page_size}&page=${page}&search=${search}&search_precise=true&platforms=${platforms}&genres=${genres}&metacritic=${rating}&ordering=${sort}`
-      )
+      let rawgRequest = ''
 
-      const result = CustomSchema.parse(response.data)
+      if (genres === '' || platforms === '') {
+        rawgRequest = `${apiUrl}/games?key=${key}&page_size=${page_size}&page=${page}&search=${search}&search_precise=true&metacritic=${rating}&ordering=${sort}`
+      } else {
+        rawgRequest = `${apiUrl}/games?key=${key}&page_size=${page_size}&page=${page}&search=${search}&search_precise=true&platforms=${platforms}&genres=${genres}&metacritic=${rating}&ordering=${sort}`
+      }
 
-      let next_page= null
+      const response = await axios.get(rawgRequest)
 
-      if(result.next !== null) {
+      const result =
+        genres === '' || platforms === ''
+          ? AllSchema.parse(response.data)
+          : CustomSchema.parse(response.data)
+
+      let next_page = null
+
+      if (result.next !== null) {
         next_page = result.next
       }
 
       const api_next = RawgService.apiFormat(next_page)
 
-      let previous_page= null
+      let previous_page = null
 
       if (result.previous !== null) {
         previous_page = result.previous

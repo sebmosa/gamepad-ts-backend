@@ -5,9 +5,9 @@
 import cors from 'cors'
 import compression from 'compression'
 import express from 'express'
-import { GamepadDB } from '../src/config/db'
-import { RawgRoute } from './routes/rawg.route'
-import { UserRoute } from './routes/user.route'
+import { GamepadDB } from '../src/config/db.js'
+import { RawgRoute } from './routes/rawg.route.js'
+import { UserRoute } from './routes/user.route.js'
 
 /**
  * App Variables

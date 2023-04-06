@@ -1,7 +1,7 @@
 import Uid2 from 'uid2'
-import Sha256 from 'crypto-js/sha256'
-import Base64 from 'crypto-js/enc-base64'
-import { User } from '../models/User'
+import Sha256 from 'crypto-js/sha256.js'
+import Base64 from 'crypto-js/enc-base64.js'
+import { User } from '../models/User.js'
 
 export class UserService {
   static async createUser(email: string, username: string, password: string) {
