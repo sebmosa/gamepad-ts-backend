@@ -9,7 +9,7 @@ export class RawgService {
       const default_page = '1'
       const api_page = urlParams.get('page') ?? default_page
       const api_search = urlParams.get('search')?.replace(/\s/g, '+')
-      const api_search_precise = urlParams.get('search_precise')
+      const api_search_precise = urlParams.get('searcqueriesh_precise')
       const api_platforms = urlParams.get('platforms')
       const api_genres = urlParams.get('genres')
       const api_metacritic = urlParams.get('metacritic')
