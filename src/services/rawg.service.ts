@@ -2,6 +2,7 @@ export class RawgService {
   static apiFormat(url: string | null) {
     if (url !== null) {
       const api_host = process.env.API_HOST
+      console.log('URL', url)
       const urlParams = new URLSearchParams(url.split('?')[1])
 
       const api_page_size = urlParams.get('page_size')
@@ -14,13 +15,11 @@ export class RawgService {
       const api_metacritic = urlParams.get('metacritic')
       const ordering = urlParams.get('ordering')
 
-      let apiUrl = ''
-
-      if (api_genres === '' || api_platforms === '') {
-        apiUrl = `${api_host}/games?page_size=${api_page_size}&page=${api_page}&search=${api_search}&search_precise=${api_search_precise}&metacritic=${api_metacritic}&ordering=${ordering}`
-      } else {
-        apiUrl = `${api_host}/games?page_size=${api_page_size}&page=${api_page}&search=${api_search}&search_precise=${api_search_precise}&platforms=${api_platforms}&genres=${api_genres}&metacritic=${api_metacritic}&ordering=${ordering}`
-      }
+      const apiUrl = `${api_host}/games?page_size=${api_page_size}&page=${api_page}&search=${api_search}&search_precise=${api_search_precise}${
+        api_platforms ? `&platforms=${api_platforms}` : `&platforms=`
+      }${
+        api_genres ? `&genres=${api_genres}` : `&genres=`
+      }&metacritic=${api_metacritic}&ordering=${ordering}`
 
       return apiUrl
     } else {
