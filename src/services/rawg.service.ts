@@ -13,14 +13,18 @@ export class RawgService {
       const api_platforms = urlParams.get('platforms')
       const api_genres = urlParams.get('genres')
       const api_metacritic = urlParams.get('metacritic')
-      const ordering = urlParams.get('ordering')
+      const api_ordering = urlParams.get('ordering')
+
+      console.log('api_ordering RAWG service', api_ordering)
+      console.log('api_metacritic RAWG service', api_metacritic)
 
       const apiUrl = `${api_host}/games?page_size=${api_page_size}&page=${api_page}&search=${api_search}&search_precise=${api_search_precise}${
         api_platforms ? `&platforms=${api_platforms}` : `&platforms=`
       }${
         api_genres ? `&genres=${api_genres}` : `&genres=`
-      }&metacritic=${api_metacritic}&ordering=${ordering}`
+      }&metacritic=${api_metacritic}&ordering=${api_ordering}`
 
+      console.log('apiUrl', apiUrl)
       return apiUrl
     } else {
       return null

@@ -1,3 +1,4 @@
+import 'dotenv/config.js'
 import { Request, Response } from 'express'
 import { UserService } from '../services/user.service.js'
 import { BaseUser } from '../types/user.type'
@@ -29,15 +30,23 @@ export class UserController {
   }
 
   static async login(req: Request, res: Response) {
+    console.log('LOGIN')
+    console.log('REQ.BODY BEFORE TRY', req.body)
+
     try {
       const user: BaseUser = req.body
 
+      console.log('REQ.BODY', req.body)
+
       const { email, password } = user
+
+      console.log('TRY LOGIN', `${email} and  ${password}`)
 
       if (typeof email === 'string' && typeof password === 'string') {
         const userExist = await UserService.checkUser(email)
-
+        console.log('EMAIL STRING PASSWORD STRING')
         if (userExist) {
+          console.log('USER EXIST')
           const verifiedUser = await UserService.validUser(email, password)
           res.status(201).json(verifiedUser)
         } else {

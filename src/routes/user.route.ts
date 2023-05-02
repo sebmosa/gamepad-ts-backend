@@ -1,11 +1,11 @@
-import { UserController } from '../controllers/user.controller.js'
 import { Router } from 'express'
-import { authentification } from '../middlewares/auth.js'
+import { UserController } from '../controllers/user.controller.js'
+import { upload } from '../middlewares/upload.js'
 
 const UserRoute = Router()
 
-UserRoute.post('/signup', UserController.signUp)
+UserRoute.post('/signup', upload, UserController.signUp)
 
-UserRoute.post('/login', authentification, UserController.login)
+UserRoute.post('/login', UserController.login)
 
 export { UserRoute }

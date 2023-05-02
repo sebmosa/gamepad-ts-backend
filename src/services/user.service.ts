@@ -1,6 +1,6 @@
-import Uid2 from 'uid2'
-import Sha256 from 'crypto-js/sha256.js'
 import Base64 from 'crypto-js/enc-base64.js'
+import Sha256 from 'crypto-js/sha256.js'
+import Uid2 from 'uid2'
 import { User } from '../models/User.js'
 
 export class UserService {

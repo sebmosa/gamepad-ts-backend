@@ -1,13 +1,12 @@
-import { Request, Response } from 'express'
 import axios from 'axios'
-import {
-  PlatformSchema,
-  GenreSchema,
-  CustomSchema,
-  AllSchema,
-  GameSchema,
-} from '../types/rawg.type.js'
+import { Request, Response } from 'express'
 import { RawgService } from '../services/rawg.service.js'
+import {
+  CustomSchema,
+  GameSchema,
+  GenreSchema,
+  PlatformSchema,
+} from '../types/rawg.type.js'
 
 // Rawg requests parameters
 const apiUrl = 'https://api.rawg.io/api'
@@ -51,23 +50,20 @@ export class RawgController {
       const search = req.query.search as string
       const platforms = req.query.platforms
       const genres = req.query.genres
-      const rating = req.query.rating as string
-      const sort = req.query.sort as string
+      const rating = req.query.metacritic as string
+      const sort = req.query.ordering as string
 
-      let rawgRequest = ''
+      const rawgRequest = `${apiUrl}/games?key=${key}&page_size=${page_size}&page=${page}&search=${search}&search_precise=true${
+        search ? `&platforms=${platforms}` : ''
+      }${
+        search ? `&genres=${genres}` : ''
+      }&metacritic=${rating}&ordering=${sort}`
 
-      if (genres === '' || platforms === '') {
-        rawgRequest = `${apiUrl}/games?key=${key}&page_size=${page_size}&page=${page}&search=${search}&search_precise=true&metacritic=${rating}&ordering=${sort}`
-      } else {
-        rawgRequest = `${apiUrl}/games?key=${key}&page_size=${page_size}&page=${page}&search=${search}&search_precise=true&platforms=${platforms}&genres=${genres}&metacritic=${rating}&ordering=${sort}`
-      }
+      console.log('rawgRequest:', rawgRequest)
 
       const response = await axios.get(rawgRequest)
 
-      const result =
-        genres === '' || platforms === ''
-          ? AllSchema.parse(response.data)
-          : CustomSchema.parse(response.data)
+      const result = CustomSchema.parse(response.data)
 
       let next_page = null
 
@@ -122,13 +118,33 @@ export class RawgController {
 
     try {
       const response = await axios.get(`${apiUrl}/games/${id}?key=${key}`)
-      const result = GameSchema.safeParse(response.data)
+      const result = GameSchema.parse(response.data)
 
-      if (!result.success) {
-        res.status(400).json(result.error)
-      } else {
-        res.status(200).json(result.data)
+      const gameDetails = {
+        id: result.id,
+        name: result.name,
+        slug: result.slug,
+        description: result.description_raw,
+        rating: result.rating,
+        metacritic: result.metacritic,
+        released: result.released,
+        background_image: result.background_image,
+        background_image_additional: result.background_image_additional,
+        metacritic_url: result.metacritic_url,
+        platforms: result.platforms.map((el) => {
+          return {
+            id: el.platform.id,
+            name: el.platform.name,
+            slug: el.platform.slug,
+          }
+        }),
+        genres: result.genres,
+        developers: result.developers,
+        publishers: result.publishers,
+        esrb_rating: result.esrb_rating,
       }
+
+      res.status(200).json(gameDetails)
     } catch (error) {
       res.status(400).json({
         errors: [{ msg: 'Bad request for game details' }],
