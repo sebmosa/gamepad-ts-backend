@@ -86,34 +86,17 @@ or
 pnpm dev
 ```
 
-## Marvel Client
-
-- React
-
-- HTTP request with axios (get, post)
-
-- Hooks (useState, useEffect, useContext)
-
-- React Router Dom
-
-- Cookies
-
-Please check :
-<a  href="[https://github.com/bangtam1994/marvel-frontend-react](https://github.com/bangtam1994/marvel-frontend-react)">[https://github.com/bangtam1994/marvel-frontend-react](https://github.com/bangtam1994/marvel-frontend-react)</a>
-
 ## Deployment
 
-- Client : deployed with Netlify
+- Server : Deployed on https://render.com
 
-- Server : deployed with Heroku
-
-- MongoDb database : hosted on Mlab
+- MongoDb database : Hosted on Atlas https://cloud.mongodb.com/
 
 ## Contact
 
-<a  href="https://www.linkedin.com/in/bangtamnguyen"  target="_blank"> <img src="https://salon-ctco.com/wp-content/uploads/2018/09/Logo-LinkedIn.png"
-width="45"
+<a  href="https://www.linkedin.com/in/s%C3%A9bastien-mosagna-85a1a29/"  target="_blank"> <img src="https://res.cloudinary.com/dr9kwlfuq/image/upload/v1683577491/Gamepad_TS_Backend/LI-In-Bug_afyv46.png"
+width="40"
 /></a>
-<a  href="mailto:bangtam1994@hotmail.com"  target="_blank"> <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Gmail_Icon.png"
+<a  href="mailto:sebmosa@gmail.com"  target="_blank"> <img src="https://res.cloudinary.com/dr9kwlfuq/image/upload/v1683577816/Gamepad_TS_Backend/Gmail_icon_ptcfsz.png"
 width="40"
 /></a>
