@@ -4,15 +4,19 @@
 
 ## Overview
 
+**Demo**
+
+<a  href="https://gamepad-ts-next.vercel.app"  target="_blank"> [https://gamepad-ts-next.vercel.app](https://gamepad-ts-next.vercel.app)</a>
+
 **Server**
 
-<a  href="https://gamepad-ts-next.vercel.app"  target="_blank"> [https://gamepad-ts-backend.onrender.com](https://gamepad-ts-backend.onrender.com)/</a>
+<a  href="https://gamepad-ts-backend.onrender.com"  target="_blank"> [https://gamepad-ts-backend.onrender.com](https://gamepad-ts-backend.onrender.com)</a>
 
 API used : https://api.rawg.io/docs/
 
 **Client**
 
-<a  href="https://gamepad-ts-next.vercel.app"  target="_blank"> https://gamepad-ts-next.vercel.app</a>
+<a  href="https://github.com/sebmosa/gamepad-ts-next"  target="_blank"> [https://github.com/sebmosa/gamepad-ts-next](https://github.com/sebmosa/gamepad-ts-next)</a>
 
 ## Packages
 
